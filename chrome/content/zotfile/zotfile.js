@@ -790,8 +790,9 @@ Zotero.ZotFile = new function() {
             var att = yield Zotero.Attachments.importFromFile(options);
             // rename attachment
             att = yield this.renameAttachment(att);
+	
             // remove file from source folder
-            if (path != att.getFilePath())
+            if (path != att.getFilePath() && !this.getPref('copy')) // 自定义设置项，保留原始文件
                 OS.File.remove(path);
         }
         // create linked attachment
